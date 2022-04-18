@@ -1,83 +1,46 @@
-SRCS		=	${wildcard *.c}				\
-				${wildcard GetNextLine/*.c}	\
-				${wildcard funcs/*/*.c}		\
+SRCS		=	${wildcard philo/*.c}		\
 
-B_SRCS		=	${wildcard *_bonus.c}		\
-				${wildcard GetNextLine/*.c}	\
+B_SRCS		=	${wildcard philo_bonus/*.c}	\
 
 OBJS		=	$(SRCS:.c=.o)	
 
 B_OBJS		=	$(B_SRCS:.c=.o)	
 
-HEADS		=	minishell.h
+HEADS		=	${wildcard philo/*.h}
 
-LIBNAME		=	libft.a
+B_HEADS		=	${wildcard philo_bonus/*.h}
 
-CD			=	funcs/cd
+NAME		=	philo/philo
 
-EXIT		=	funcs/exit
+B_NAME		=	philo_bonus/philo_bonus
 
-LIBPATH		=	libft/
-
-LIB			=	$(addprefix $(LIBPATH), $(LIBNAME))
-
-BLTIN		=	builtins
-
-GNL			=	GetNextLine
-
-NAME		=	minishell
-
-GCC			=	gcc -g -MMD -Wall -Wextra -Werror
+GCC			=	gcc -MMD -Wall -Wextra -Werror
 
 RM			=	rm -f
 
-READCLUDE	= -I~/.brew/opt/readline/include
-
-READLINE	= -lreadline -L ~/.brew/opt/readline/lib $(READCLUDE)
-
 %.o: 		%.c
-			$(GCC) -c -I$(LIBPATH) -I$(GNL) -I$(CD) -I$(EXIT) $(READCLUDE) $< -o $@
+			$(GCC) -c $< -o $@
 
-$(NAME):	$(HEADS) $(LIB) $(OBJS) $(BLTIN)
-			$(GCC) $(OBJS) $(LIB) -o $(NAME) $(READLINE)
+$(NAME):	$(HEADS) $(OBJS)
+			$(GCC) $(OBJS) -o $(NAME)
+
+$(B_NAME):	$(B_HEADS) $(B_OBJS)
+			$(GCC) $(OBJS) -o $(NAME)
 			
-
-$(BLTIN):	bltin
-
-bltin:
-			@$(MAKE) -C $(BLTIN)
 
 all:		$(NAME)
 
-$(LIB):		lib
-
-lib:		
-			@$(MAKE) -C $(LIBPATH)
-
-bonus:		$(NAME)
-			@echo "o, privet! tut takoe delo, nashi bonusy "
-			@echo "vshity v kod iznachal'no i razorvat' proekt na "
-			@echo "2 chasti ves'ma problematichno, poetomu vse "
-			@echo "kompilitsya srazu. v realizacii bonusov my ne "
-			@echo "ispol'zovali ni odnoy zapreschennoy funkcii, "
-			@echo "potomu problem c chitami i normoy net. v to je vremya, "
-			@echo "subj trebuet otdel'noe pravilo pod bonusy, poetomu ty "
-			@echo "schas eto i chitaesh'))00)"
+bonus:		$(B_NAME)
 
 clean:
-			@$(MAKE) -C $(LIBPATH) clean
-			@$(MAKE) -C $(BLTIN) clean
-			$(RM) $(wildcard *.d)
-			$(RM) ${wildcard GetNextLine/*.d}
+			$(RM) $(wildcard */*.d)
 			$(RM) $(OBJS)
 			$(RM) $(B_OBJS)
 
 fclean: 	clean
-			@$(MAKE) -C $(LIBPATH) fclean
-			@$(MAKE) -C $(BLTIN) fclean
 			$(RM) $(NAME)
 			$(RM) $(B_NAME)
 
 re:			fclean all
 
-.PHONY:		all bonus clean fclean re lib
+.PHONY:		all bonus clean fclean re
