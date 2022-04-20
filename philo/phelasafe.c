@@ -6,7 +6,7 @@
 /*   By: dcelsa <dcelsa@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/18 22:56:48 by dcelsa            #+#    #+#             */
-/*   Updated: 2022/04/18 23:00:03 by dcelsa           ###   ########.fr       */
+/*   Updated: 2022/04/20 19:43:06 by dcelsa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ t_bool	morg(t_phela *phelas, t_meta *meta, struct timeval tp[2])
 		if (phelas[i].lastmeal >= meta->lifetime && ++meta->appocalipsis)
 			return (logger(&tp[1], &phelas[i], LOGDTH));
 	}
-	return ((fullphelas >= phelas->meta->numphelas));
+	return (fullphelas >= phelas->meta->numphelas);
 }
 
 int	main(int argc, char **argv)
