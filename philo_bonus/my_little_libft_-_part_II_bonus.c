@@ -6,7 +6,7 @@
 /*   By: dcelsa <dcelsa@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/18 22:56:50 by dcelsa            #+#    #+#             */
-/*   Updated: 2022/04/20 22:21:09 by dcelsa           ###   ########.fr       */
+/*   Updated: 2022/04/22 18:51:22 by dcelsa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,54 @@ int	customerrhndlr(char *prog, char *txt)
 	exit(1);
 }
 
-t_bool	logger(t_common *common, int id, char *txt)
-{
-	struct timeval tp;
+// static void	*printer(void *arg)
+// {
+// 	struct timeval	tp;
+// 	t_log			*log;
 
-	sem_wait(common->stamert);
-	sem_post(common->stamert);
+// 	log = (t_log *)arg;
+// 	if (!log->dvuhsotiy)
+// 		sem_wait(log->common->matyugalnik);
+// 	gettimeofday(&tp, NULL);
+// 	ft_putnbr_fd(tp.tv_sec * 1000 + tp.tv_usec / 1000 - log->common->ad, 1);
+// 	ft_putstr_fd(" ", 1);
+// 	ft_putnbr_fd(log->id, 1);
+// 	ft_putstr_fd(" ", 1);
+// 	ft_putendl_fd(log->txt, 1);
+// 	if (!log->dvuhsotiy)
+// 		sem_post(log->common->matyugalnik);
+// 	return (NULL);
+// }
+
+// void	logger(t_common *common, int id, char *txt)
+// {
+// 	t_log	log;
+
+// 	log.common = common;
+// 	log.id = id;
+// 	log.txt = txt;
+// 	log.dvuhsotiy = TRUE;
+// 	if (ft_strncmp(txt, LOGDTH, -1) && log.dvuhsotiy--)
+// 	{
+// 		sem_wait(common->stamert);
+// 		sem_post(common->stamert);
+// 	}
+// 	pthread_create(&log.t, NULL, &printer, &log);
+// 	if (!ft_strncmp(txt, LOGDTH, -1))
+// 		pthread_join(log.t, NULL);
+// 	else
+// 		pthread_detach(log.t);
+// }
+
+void	logger(t_common *common, int id, char *txt)
+{
+	struct timeval	tp;
+
+	if (ft_strncmp(txt, LOGDTH, -1))
+	{
+		sem_wait(common->stamert);
+		sem_post(common->stamert);
+	}
 	sem_wait(common->matyugalnik);
 	gettimeofday(&tp, NULL);
 	ft_putnbr_fd(tp.tv_sec * 1000 + tp.tv_usec / 1000 - common->ad, 1);
@@ -34,7 +76,6 @@ t_bool	logger(t_common *common, int id, char *txt)
 	ft_putstr_fd(" ", 1);
 	ft_putendl_fd(txt, 1);
 	sem_post(common->matyugalnik);
-	return (TRUE);
 }
 
 int	ft_strncmp(const char *s1, const char *s2, size_t n)

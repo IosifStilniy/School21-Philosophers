@@ -6,7 +6,7 @@
 /*   By: dcelsa <dcelsa@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/18 22:56:48 by dcelsa            #+#    #+#             */
-/*   Updated: 2022/04/20 19:43:06 by dcelsa           ###   ########.fr       */
+/*   Updated: 2022/04/21 20:43:23 by dcelsa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,10 +102,6 @@ int	main(int argc, char **argv)
 	meta.ad = tp[0].tv_sec * 1000 + tp[0].tv_usec / 1000;
 	while (!meta.appocalipsis)
 		meta.appocalipsis = morg(phelas, &meta, tp);
-	i = -1;
-	while (++i < meta.numphelas)
-		pthread_mutex_destroy(&meta.forks[i]);
-	pthread_mutex_destroy(&meta.matyugalnik);
 	free(meta.forks);
 	free(phelas);
 	return (0);

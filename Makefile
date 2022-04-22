@@ -25,7 +25,7 @@ $(NAME):	$(HEADS) $(OBJS)
 			$(GCC) $(OBJS) -o $(NAME)
 
 $(B_NAME):	$(B_HEADS) $(B_OBJS)
-			$(GCC) $(OBJS) -o $(NAME)
+			$(GCC) $(B_OBJS) -o $(B_NAME)
 			
 
 all:		$(NAME)
