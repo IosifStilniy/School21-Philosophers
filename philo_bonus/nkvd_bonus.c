@@ -6,7 +6,7 @@
 /*   By: dcelsa <dcelsa@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/22 19:33:43 by dcelsa            #+#    #+#             */
-/*   Updated: 2022/04/22 20:21:36 by dcelsa           ###   ########.fr       */
+/*   Updated: 2022/04/23 15:21:23 by dcelsa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,7 @@ static void	*shift(void *arg)
 		if (!phela->omnomnom)
 			jdun(phela->kushoet);
 		waitpid(phela->omnomnom, NULL, WUNTRACED);
+		phela->omnomnom = 0;
 		gettimeofday(&tp[1], NULL);
 		if (morg(phela, tp, &lastmeal, &eatcount))
 			return (NULL);
@@ -111,6 +112,8 @@ void	watch(t_phela *phelas, t_nkvd *nkvd)
 	i = -1;
 	while (++i < nkvd->numphelas)
 	{
+		if (phelas[i].omnomnom)
+			kill(phelas[i].omnomnom, SIGINT);
 		kill(phelas[i].pid, SIGINT);
 		sem_unlink(phelas[i].semname);
 	}

@@ -6,7 +6,7 @@
 /*   By: dcelsa <dcelsa@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/18 22:56:45 by dcelsa            #+#    #+#             */
-/*   Updated: 2022/04/18 23:01:28 by dcelsa           ###   ########.fr       */
+/*   Updated: 2022/04/23 15:14:39 by dcelsa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ typedef struct s_meta {
 	pthread_mutex_t		*forks;
 	pthread_mutex_t		matyugalnik;
 	t_bool				appocalipsis;
+	int					dvuhsotiye;
 	int					numphelas;
 	int					ad;
 	int					lifetime;

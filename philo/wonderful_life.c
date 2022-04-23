@@ -6,7 +6,7 @@
 /*   By: dcelsa <dcelsa@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/18 22:56:52 by dcelsa            #+#    #+#             */
-/*   Updated: 2022/04/18 23:05:49 by dcelsa           ###   ########.fr       */
+/*   Updated: 2022/04/23 15:20:31 by dcelsa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,12 +85,15 @@ void	*what_a_wonderful_life(void *arg)
 	{
 		if ((phela->meta->appocalipsis
 				|| phela->lastmeal >= phela->meta->lifetime))
-			return (NULL);
+			break ;
 		logger(&tp, phela, LOGTNK);
 		if (jrat(phela, &tp))
-			return (NULL);
+			break ;
 		logger(&tp, phela, LOGSLP);
 		timemachine(phela->meta->sleeptime);
 	}
+	pthread_mutex_lock(&phela->meta->matyugalnik);
+	phela->meta->dvuhsotiye++;
+	pthread_mutex_unlock(&phela->meta->matyugalnik);
 	return (NULL);
 }

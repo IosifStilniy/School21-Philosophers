@@ -6,7 +6,7 @@
 /*   By: dcelsa <dcelsa@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/18 22:56:48 by dcelsa            #+#    #+#             */
-/*   Updated: 2022/04/21 20:43:23 by dcelsa           ###   ########.fr       */
+/*   Updated: 2022/04/23 15:20:47 by dcelsa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ static int	inition(t_phela **phelas, t_meta *meta, char **argv)
 	if ((*argv && meta->eatcount <= 0) || meta->numphelas <= 0
 		|| meta->lifetime <= 0 || meta->eattime <= 0 || meta->sleeptime <= 0)
 		return (TRUE);
+	meta->dvuhsotiye = 0;
 	*phelas = malloc(sizeof(**phelas) * meta->numphelas);
 	meta->forks = malloc(sizeof(*meta->forks) * meta->numphelas);
 	i = -1;
@@ -69,10 +70,7 @@ t_bool	morg(t_phela *phelas, t_meta *meta, struct timeval tp[2])
 			fullphelas++;
 		while (!((tp[1].tv_sec - tp[0].tv_sec) * 1000 + tp[1].tv_usec / 1000
 				- tp[0].tv_usec / 1000))
-		{
-			usleep(100);
 			gettimeofday(&tp[1], NULL);
-		}
 		if (!phelas[i].kushoet)
 			phelas[i].lastmeal += (tp[1].tv_sec - tp[0].tv_sec) * 1000
 				+ (tp[1].tv_usec - tp[0].tv_usec) / 1000;
@@ -102,6 +100,8 @@ int	main(int argc, char **argv)
 	meta.ad = tp[0].tv_sec * 1000 + tp[0].tv_usec / 1000;
 	while (!meta.appocalipsis)
 		meta.appocalipsis = morg(phelas, &meta, tp);
+	while (meta.dvuhsotiye < meta.numphelas)
+		;
 	free(meta.forks);
 	free(phelas);
 	return (0);
