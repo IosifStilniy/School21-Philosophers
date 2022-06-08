@@ -6,7 +6,7 @@
 /*   By: dcelsa <dcelsa@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/18 22:56:48 by dcelsa            #+#    #+#             */
-/*   Updated: 2022/04/22 20:22:15 by dcelsa           ###   ########.fr       */
+/*   Updated: 2022/06/08 19:35:15 by dcelsa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ static void	what_a_wonderful_life(t_meta *meta, int id, sem_t *kushoet)
 
 	sem_wait(meta->common->stamert);
 	gettimeofday(&tp, NULL);
-	id++;
 	meta->common->ad = tp.tv_sec * 1000 + tp.tv_usec / 1000;
 	while (1)
 	{
