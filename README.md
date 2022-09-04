@@ -73,3 +73,7 @@ with a mutex for each of them.
 a semaphore.
 * Each philosopher should be a process. But the main process should not be a
 philosopher.
+
+---
+
+<img width="1177" alt="Screen Shot 2022-09-04 at 19 16 56" src="https://user-images.githubusercontent.com/89987795/188323139-86259a47-3aa9-4fae-8d32-a496532282dc.png">
